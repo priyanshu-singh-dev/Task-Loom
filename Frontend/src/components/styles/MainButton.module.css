@@ -1,0 +1,37 @@
+.topStyling {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+
+  background: var(--main-theme-color);
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Hover: slight lift + color shift */
+.topStyling:hover {
+  background: var(--main-theme-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(128, 64, 191, 0.25);
+}
+
+/* Click: soft press */
+.topStyling:active {
+  transform: scale(0.97);
+  background: var(--main-theme-dark);
+}
+
+/* Focus (clean, not flashy) */
+.topStyling:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(128, 64, 191, 0.25);
+}
