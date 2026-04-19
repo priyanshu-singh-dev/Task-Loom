@@ -1,23 +1,14 @@
 :root {
   --main-theme-color: #8040bf;
-
-  /* lighter + darker variants (for UI states) */
   --main-theme-light: #9d6cff;
   --main-theme-dark: #6633a6;
-
-  /* subtle accent (instead of green) */
   --accent-color: #cbb4f6;
-
-  /* text */
   --main-text-color: #1a1a1a;
   --muted-text-color: #6b6b6b;
-
-  /* background */
   --main-bg-color: #f6f3fb;
   --card-bg: #ffffff;
-
-  /* borders & shadows */
   --border-color: #e6def5;
+  --shadow-soft: 0 6px 18px rgba(128, 64, 191, 0.15);
   --shadow-soft: 0 6px 18px rgba(128, 64, 191, 0.15);
 }
 * {
@@ -40,7 +31,12 @@ h4 {
   font-size: 19px;
   font-family: "Montserrat", sans-serif;
 }
-p {
+p,
+span,
+button,
+input,
+select,
+label {
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
 }

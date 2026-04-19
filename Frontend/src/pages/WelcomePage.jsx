@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./styles/Welcome.module.css";
 import MainButton from "../components/MainButton";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function WelcomePage() {
+  const nav = useNavigate();
   return (
     <main className={styles.mainContainer}>
       <div className={styles.glow}></div>
@@ -16,11 +18,15 @@ export default function WelcomePage() {
         </p>
 
         <div className={styles.buttonContainer}>
-          <MainButton title="Enter the Loom" />
+          <MainButton title="Enter the Loom" onClicked={() => nav("login")} />
 
-          <button className={styles.joinTheLoomButton}>
+          <Link
+            to="/signin"
+            style={{ textDecoration: "none" }}
+            className={styles.joinTheLoomButton}
+          >
             <p>Want to join the loom</p>
-          </button>
+          </Link>
         </div>
       </section>
     </main>
