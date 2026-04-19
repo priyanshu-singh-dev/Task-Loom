@@ -1,0 +1,34 @@
+{
+  "name": "task-loom",
+  "version": "1.0.0",
+  "description": "Task Loom backend provides RESTful APIs to create, update, delete, and manage tasks. It ensures data storage, validation, and scalability, enabling efficient task tracking and seamless frontend integration.",
+  "keywords": [
+    "NodeJs",
+    "express",
+    "mongodb",
+    "mongooes",
+    "body-parser",
+    "json",
+    "RESTapi"
+  ],
+  "homepage": "https://github.com/Crafter-of-code/Task-Loom#readme",
+  "bugs": {
+    "url": "https://github.com/Crafter-of-code/Task-Loom/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crafter-of-code/Task-Loom.git"
+  },
+  "license": "ISC",
+  "author": "PriyanshuSingh, Crafter-of-code",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.4.1"
+  }
+}
