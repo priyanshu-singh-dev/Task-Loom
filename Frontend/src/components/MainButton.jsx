@@ -1,13 +1,14 @@
 import styles from "./styles/MainButton.module.css";
-export default function MainButton(props) {
+
+export default function MainButton({ title, disabled, onClicked }) {
   return (
-    <>
-      <button
-        className={styles.topStyling}
-        onClick={(event) => props.onClicked(event)}
-      >
-        {props.title}
-      </button>
-    </>
+    <button
+      type="submit"
+      className={styles.topStyling}
+      disabled={disabled}
+      onClick={(event) => onClicked(event)}
+    >
+      {title}
+    </button>
   );
 }
