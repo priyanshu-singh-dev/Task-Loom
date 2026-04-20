@@ -31,3 +31,16 @@
   outline: none;
   box-shadow: 0 0 0 3px rgba(128, 64, 191, 0.25);
 }
+.topStyling:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* prevent hover effect when disabled */
+.topStyling:disabled:hover {
+  background: #ccc;
+  transform: none;
+  box-shadow: none;
+}

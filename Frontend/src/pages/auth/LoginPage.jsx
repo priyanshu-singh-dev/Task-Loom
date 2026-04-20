@@ -4,54 +4,52 @@ import MainButton from "../../components/MainButton";
 import { Link } from "react-router-dom";
 
 export default function LoginPage() {
-  const [userEmail, setUserEmail] = React.useState("");
-  const [userPassword, setUserPassword] = React.useState("");
-
-  function loginHandler(event) {
+  const baseUrl = "http://localhost:3000";
+  const [userEmail, setUserEmail] = React.useState("hello111@gmail.com");
+  const [userPassword, setUserPassword] = React.useState("hello");
+  const [loading, setLoading] = React.useState(false);
+  const isFormValid = userEmail.trim() && userPassword.trim();
+  async function loginHandler(event) {
     event.preventDefault();
-    console.log({ userEmail, userPassword });
+    if (loading) return;
+    setLoading(true);
+    const data = { userEmail, userPassword };
+    try {
+      const response = await fetch(`${baseUrl}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+      const result = await response.json();
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
-
   return (
     <main className={styles.mainContainer}>
       <div className={styles.glow}></div>
-
       <section className={styles.card}>
         <h1>Welcome back</h1>
         <p>Log in to continue weaving your tasks into progress.</p>
-
         <form className={styles.form} onSubmit={loginHandler}>
           <div className={styles.inputGroup}>
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "start",
-              }}
-            >
-              <label htmlFor="userEmail">UserEmail</label>
-            </div>
+            <label htmlFor="userEmail">User Email</label>
             <input
-              type="text"
+              type="email"
               id="userEmail"
-              placeholder="Enter your userEmail"
+              placeholder="Enter your email"
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
               autoComplete="on"
+              required
             />
           </div>
-
           <div className={styles.inputGroup}>
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "start",
-              }}
-            >
-              <label htmlFor="userpassword">Password</label>
-            </div>
-
+            <label htmlFor="userpassword">Password</label>
             <input
               type="password"
               id="userpassword"
@@ -59,11 +57,14 @@ export default function LoginPage() {
               value={userPassword}
               onChange={(e) => setUserPassword(e.target.value)}
               autoComplete="on"
+              required
             />
           </div>
-
-          <MainButton title="Log in" onClicked={loginHandler} />
-
+          <MainButton
+            title={loading ? "Logging in..." : "Log in"}
+            disabled={!isFormValid || loading}
+            onClicked={loginHandler}
+          />
           <span className={styles.bottomText}>
             New here? <Link to="/signin">Create an account</Link>
           </span>

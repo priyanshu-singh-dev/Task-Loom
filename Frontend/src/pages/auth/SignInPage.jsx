@@ -4,15 +4,55 @@ import MainButton from "../../components/MainButton";
 import { Link } from "react-router-dom";
 
 export default function SignInPage() {
-  const [userName, setUserName] = React.useState("");
-  const [userEmail, setUserEmail] = React.useState("");
-  const [userPassword, setUserPassword] = React.useState("");
+  const baseUrl = "http://localhost:3000";
+
+  const [userName, setUserName] = React.useState("hello");
+  const [userEmail, setUserEmail] = React.useState("hello@gmail.com");
+  const [userPassword, setUserPassword] = React.useState("hello");
   const [userCountry, setUserCountry] = React.useState("");
   const [userGender, setUserGender] = React.useState("");
 
-  function submitHandler(e) {
+  const [loading, setLoading] = React.useState(false); // ✅ loading state
+
+  const isFormValid =
+    userName.trim() &&
+    userEmail.trim() &&
+    userPassword.trim() &&
+    userCountry &&
+    userGender;
+
+  async function submitHandler(e) {
     e.preventDefault();
-    console.log({ userName, userEmail, userPassword, userCountry, userGender });
+
+    if (loading) return;
+
+    setLoading(true);
+
+    const data = {
+      userName,
+      userEmail,
+      userPassword,
+      userCountry,
+      userGender,
+    };
+
+    try {
+      const response = await fetch(`${baseUrl}/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const result = await response.json();
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -29,39 +69,37 @@ export default function SignInPage() {
             <input
               type="text"
               id="userName"
-              placeholder="Enter username"
               value={userName}
+              required
               onChange={(e) => setUserName(e.target.value)}
             />
           </div>
-
           <div className={styles.inputGroup}>
             <label htmlFor="userEmail">Email</label>
             <input
               type="email"
               id="userEmail"
-              placeholder="Enter email"
               value={userEmail}
+              required
               onChange={(e) => setUserEmail(e.target.value)}
             />
           </div>
-
           <div className={styles.inputGroup}>
             <label htmlFor="userPassword">Password</label>
             <input
               type="password"
               id="userPassword"
-              placeholder="Enter password"
               value={userPassword}
+              required
               onChange={(e) => setUserPassword(e.target.value)}
             />
           </div>
-
           <div className={styles.inputGroup}>
             <label htmlFor="selectCountry">Country</label>
             <select
               id="selectCountry"
               value={userCountry}
+              required
               onChange={(e) => setUserCountry(e.target.value)}
             >
               <option value="">Select country</option>
@@ -80,6 +118,7 @@ export default function SignInPage() {
                   type="radio"
                   name="gender"
                   value="male"
+                  required
                   onChange={(e) => setUserGender(e.target.value)}
                 />
                 Male
@@ -96,8 +135,10 @@ export default function SignInPage() {
               </label>
             </div>
           </div>
-
-          <MainButton title="Create account" onClicked={submitHandler} />
+          <MainButton
+            title={loading ? "Creating..." : "Create account"}
+            disabled={!isFormValid || loading}
+          />
 
           <span className={styles.bottomText}>
             Already have an account? <Link to="/login">Log in</Link>
