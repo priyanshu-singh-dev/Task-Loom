@@ -1,0 +1,12 @@
+.mainContainer {
+  padding: 20px 30px;
+  background-color: var(--accent-color);
+  border-radius: 10px;
+}
+h2 {
+  font-size: 40px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: end;
+}
