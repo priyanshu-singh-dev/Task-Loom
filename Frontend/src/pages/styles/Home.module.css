@@ -1,0 +1,19 @@
+.mainContainer {
+  /* width: ; */
+  /* height: 94vh; */
+  /* max-height: calc(100vh - 60px); */
+  flex-grow: 1;
+  background-color: var(--ligh-accent-color);
+  display: flex;
+  justify-content: center;
+}
+.mainSubContainer {
+  width: 100vw;
+  max-width: 1214px;
+}
+.taskCardMainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 10px;
+}
