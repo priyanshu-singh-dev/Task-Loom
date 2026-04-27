@@ -6,12 +6,15 @@ import dbConnection from "./db/connection.db.js";
 import cookieParser from "cookie-parser";
 import signinController from "./controllers/auth/signin.controller.js";
 import loginController from "./controllers/auth/login.controller.js";
+import cookieChecker from "./middlewares/cookieChecker.js";
+// import homeController from "./controllers/home.controller.js";
+import createTask from "./controllers/createTask.controller.js";
 
 const port = process.env.PORT;
 const app = express();
 app.use(express.json());
 /* * */
-app.use(cors({ origin: "http://localhost:5173 ", credentials: true }));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());
 dbConnection();
 app.get("/", (req, res) => {
@@ -28,7 +31,10 @@ app.post("/login", loginController);
 /*
  * working routes
  */
+// app.get("/home", cookieChecker, homeController);
+app.post("/create-task", cookieChecker, createTask);
 
+/* listening route */
 app.listen(port, () => {
   console.log(`your app is running ${port}`);
 });

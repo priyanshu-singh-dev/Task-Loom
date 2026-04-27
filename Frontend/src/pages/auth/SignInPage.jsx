@@ -2,68 +2,41 @@ import React from "react";
 import styles from "./SignInPage.module.css";
 import MainButton from "../../components/MainButton";
 import { Link } from "react-router-dom";
+import { baseContext } from "../../store/BaseContextProvider";
 
 export default function SignInPage() {
-  const baseUrl = "http://localhost:3000";
-
-  const [userName, setUserName] = React.useState("hello");
-  const [userEmail, setUserEmail] = React.useState("hello@gmail.com");
-  const [userPassword, setUserPassword] = React.useState("hello");
-  const [userCountry, setUserCountry] = React.useState("");
-  const [userGender, setUserGender] = React.useState("");
-
-  const [loading, setLoading] = React.useState(false); // ✅ loading state
-
+  const {
+    signInHandler,
+    userName,
+    setUserName,
+    userEmail,
+    setUserEmail,
+    userPassword,
+    setUserPassword,
+    userCountry,
+    setUserCountry,
+    userGender,
+    setUserGender,
+    loading,
+    setLoading,
+  } = React.useContext(baseContext);
   const isFormValid =
     userName.trim() &&
     userEmail.trim() &&
     userPassword.trim() &&
     userCountry &&
     userGender;
-
-  async function submitHandler(e) {
-    e.preventDefault();
-
-    if (loading) return;
-
-    setLoading(true);
-
-    const data = {
-      userName,
-      userEmail,
-      userPassword,
-      userCountry,
-      userGender,
-    };
-
-    try {
-      const response = await fetch(`${baseUrl}/signin`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        credentials: "include",
-      });
-
-      const result = await response.json();
-      console.log(result);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <main className={styles.mainContainer}>
       <div className={styles.glow}></div>
 
       <section className={styles.card}>
-        <h1>Create account</h1>
+        <h1 title="Create account" aria-label="Signin Page">
+          Create account
+        </h1>
         <p>Start organizing your tasks with Task Loom.</p>
 
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form className={styles.form}>
           <div className={styles.inputGroup}>
             <label htmlFor="userName">Username</label>
             <input
@@ -138,10 +111,14 @@ export default function SignInPage() {
           <MainButton
             title={loading ? "Creating..." : "Create account"}
             disabled={!isFormValid || loading}
+            onClicked={signInHandler}
           />
 
           <span className={styles.bottomText}>
-            Already have an account? <Link to="/login">Log in</Link>
+            Already have an account?{" "}
+            <Link title="login page" to="/login">
+              Log in
+            </Link>
           </span>
         </form>
       </section>

@@ -1,31 +1,24 @@
 import { Outlet } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
+import AppContextProvider from "./store/AppContextProvider";
+import Header from "./components/Header";
 
 function App() {
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-        }}
-      >
-        <header
+      <AppContextProvider>
+        <div
           style={{
-            order: 2,
-            // minHeight: "60px",
-            // height: "5vh",
-            maxHeight: "60px",
-            height: "50px",
-            backgroundColor: "var(--accent-color)",
+            display: "flex",
+            flexDirection: "column",
+            height: "100vh",
           }}
         >
-          This is my header
-        </header>
-        <Outlet />
-      </div>
-      <footer style={{ display: "none" }}>This is my footer</footer>
+          <Header />
+          <Outlet />
+        </div>
+        <footer style={{ display: "none" }}>This is my footer</footer>
+      </AppContextProvider>
     </>
   );
 }

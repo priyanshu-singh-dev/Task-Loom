@@ -1,0 +1,66 @@
+.mainContainer {
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+}
+.innerContainer {
+  width: 100vw;
+  max-width: 1214px;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 30px;
+    margin-bottom: 0.2rem;
+  }
+  h2 {
+    font-size: 20px;
+    margin-bottom: 0.2rem;
+  }
+  h3 {
+    font-size: 15px;
+    margin-bottom: 0.2rem;
+  }
+  margin: auto auto;
+  gap: 50px;
+}
+input {
+  width: 50%;
+  width: 100%;
+  padding: 10px 0px 10px 10px;
+
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+
+  background: var(--card-bg);
+  color: var(--main-text-color);
+
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+
+  transition: all 0.2s ease;
+}
+textarea {
+  width: 50%;
+  width: 100%;
+  padding: 10px 0px 10px 10px;
+
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+
+  background: var(--card-bg);
+  color: var(--main-text-color);
+
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+
+  transition: all 0.2s ease;
+}
+input:focus {
+  outline: none;
+  border-color: var(--main-theme-color);
+  box-shadow: 0 0 0 2px rgba(128, 64, 191, 0.15);
+}
+.inserFile {
+  user-select: none !important;
+  opacity: 0.5;
+}

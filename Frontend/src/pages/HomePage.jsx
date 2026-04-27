@@ -1,9 +1,12 @@
 import React from "react";
 import style from "./styles/Home.module.css";
 import TaskCard from "../components/TaskCard";
-import { baseContext } from "../store/BaseContextProvider";
+import { appContext } from "../store/AppContextProvider";
 export default function HomePage() {
-  const { tempTaskData } = React.useContext(baseContext);
+  const { tempTaskData, fetchTask } = React.useContext(appContext);
+  React.useEffect(() => {
+    fetchTask();
+  }, []);
   return (
     <main className={style.mainContainer}>
       <section className={style.mainSubContainer}>
