@@ -10,7 +10,6 @@ export default function MainButton({
   return (
     <button
       type="submit"
-      // type="button"
       className={styles.topStyling}
       disabled={disabled}
       onClick={(event) => onClicked(event)}

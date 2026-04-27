@@ -10,7 +10,9 @@ export default function WelcomePage() {
       <div className={styles.glow}></div>
 
       <section className={styles.card}>
-        <h1>Task Loom</h1>
+        <h1 title="Task Loom" aria-label="Heading of the App: Task Loom">
+          Task Loom
+        </h1>
 
         <p>
           Weave your tasks into a clear, focused workflow. Plan smarter, stay
@@ -21,6 +23,7 @@ export default function WelcomePage() {
           <MainButton title="Enter the Loom" onClicked={() => nav("login")} />
 
           <Link
+            title="signin page"
             to="/signin"
             style={{ textDecoration: "none" }}
             className={styles.joinTheLoomButton}

@@ -8,6 +8,7 @@ import LoginPage from "./pages/auth/LoginPage.jsx";
 import SignInPage from "./pages/auth/SignInPage.jsx";
 import Base from "./Base.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import CreateTask from "./pages/CreateTask.jsx";
 const router = createBrowserRouter([
   {
     path: "",
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <HomePage />,
+          },
+          {
+            path: "create-task",
+            element: <CreateTask />,
           },
         ],
       },

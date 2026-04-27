@@ -1,24 +1,29 @@
 import userModel from "../../models/user.model.js";
-
 export default async function loginController(req, res) {
   const { userEmail, userPassword } = req.body;
-  console.log(req.body);
   try {
-    const user = await userModel.findOne(
-      { userEmail },
-      { userPassword: 1, _id: 0 }
-    );
-    if (user.userPassword == userPassword) {
-      res
-        .status(200)
-        .cookie(_uId, user._id)
-        .json({ success: true, message: "welcome to Task loom" });
-    } else {
-      res
-        .status(404)
-        .json({ success: false, message: "your password is wrong" });
+    const user = await userModel.findOne({ userEmail });
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User not found",
+      });
     }
+    if (user.userPassword !== userPassword) {
+      return res.status(401).json({
+        success: false,
+        message: "Wrong password",
+      });
+    }
+    res.status(200).cookie("uId", user._id).json({
+      success: true,
+      message: "Welcome to Task Loom",
+    });
   } catch (e) {
-    res.status(404).json({ success: false, message: "user not found" });
+    console.error(e);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 }

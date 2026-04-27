@@ -2,38 +2,26 @@ import React from "react";
 import styles from "./LoginPage.module.css";
 import MainButton from "../../components/MainButton";
 import { Link } from "react-router-dom";
+import { baseContext } from "../../store/BaseContextProvider";
 
 export default function LoginPage() {
-  const baseUrl = "http://localhost:3000";
-  const [userEmail, setUserEmail] = React.useState("hello111@gmail.com");
-  const [userPassword, setUserPassword] = React.useState("hello");
-  const [loading, setLoading] = React.useState(false);
-  const isFormValid = userEmail.trim() && userPassword.trim();
-  async function loginHandler(event) {
-    event.preventDefault();
-    if (loading) return;
-    setLoading(true);
-    const data = { userEmail, userPassword };
-    try {
-      const response = await fetch(`${baseUrl}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-        credentials: "include",
-      });
-      const result = await response.json();
-      console.log(result);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const {
+    userEmail,
+    setUserEmail,
+    userPassword,
+    setUserPassword,
+    loading,
+    setLoading,
+    isFormValid,
+    loginHandler,
+  } = React.useContext(baseContext);
   return (
     <main className={styles.mainContainer}>
       <div className={styles.glow}></div>
       <section className={styles.card}>
-        <h1>Welcome back</h1>
+        <h1 title="Welcome back" aria-label="Login page">
+          Welcome back
+        </h1>
         <p>Log in to continue weaving your tasks into progress.</p>
         <form className={styles.form} onSubmit={loginHandler}>
           <div className={styles.inputGroup}>
@@ -66,7 +54,10 @@ export default function LoginPage() {
             onClicked={loginHandler}
           />
           <span className={styles.bottomText}>
-            New here? <Link to="/signin">Create an account</Link>
+            New here?{" "}
+            <Link title="sigin page" to="/signin">
+              Create an account
+            </Link>
           </span>
         </form>
       </section>
