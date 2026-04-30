@@ -7,7 +7,10 @@ import cookieParser from "cookie-parser";
 import signinController from "./controllers/auth/signin.controller.js";
 import loginController from "./controllers/auth/login.controller.js";
 import cookieChecker from "./middlewares/cookieChecker.js";
-// import homeController from "./controllers/home.controller.js";
+import {
+  allTasksController,
+  singleTaskController,
+} from "./controllers/tasks.controller.js";
 import createTask from "./controllers/createTask.controller.js";
 
 const port = process.env.PORT;
@@ -31,8 +34,9 @@ app.post("/login", loginController);
 /*
  * working routes
  */
-// app.get("/home", cookieChecker, homeController);
+app.get("/tasks", cookieChecker, allTasksController);
 app.post("/create-task", cookieChecker, createTask);
+app.get("/task", cookieChecker, singleTaskController);
 
 /* listening route */
 app.listen(port, () => {

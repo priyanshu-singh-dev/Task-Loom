@@ -6,6 +6,7 @@ export default function MainButton({
   onClicked,
   height,
   width,
+  bgColor,
 }) {
   return (
     <button
@@ -13,7 +14,7 @@ export default function MainButton({
       className={styles.topStyling}
       disabled={disabled}
       onClick={(event) => onClicked(event)}
-      style={{ height: height, width: width }}
+      style={{ height: height, width: width, backgroundColor: bgColor }}
     >
       {title}
     </button>

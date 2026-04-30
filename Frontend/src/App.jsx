@@ -8,11 +8,13 @@ function App() {
     <>
       <AppContextProvider>
         <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100vh",
-          }}
+          style={
+            {
+              // display: "flex",
+              // flexDirection: "column",
+              // minHeight: "100vh",
+            }
+          }
         >
           <Header />
           <Outlet />

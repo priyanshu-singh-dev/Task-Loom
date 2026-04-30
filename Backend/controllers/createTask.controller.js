@@ -15,9 +15,9 @@ export default async function createTask(req, res) {
       });
     })
     .catch((e) => {
-      res.status(401).json({
+      res.status(501).json({
         success: true,
-        message: "You are unathorized",
+        message: "Problem with the note",
       });
     });
 }
