@@ -17,7 +17,7 @@ export default function CreateTask() {
     <>
       <main className={styles.mainContainer}>
         <section className={styles.innerContainer}>
-          <div>
+          <div style={{ width: "100%" }}>
             <h1 title="Task title" aria-label="task title">
               Task title
             </h1>

@@ -4,9 +4,6 @@ export const baseContext = React.createContext();
 
 export default function BaseContextProvider({ children }) {
   const nav = useNavigate();
-  /*
-  Auth functionality
-  */
   const baseUrl = "http://localhost:3000";
   const [userName, setUserName] = React.useState("hello");
   const [userEmail, setUserEmail] = React.useState("hello@gmail.com");

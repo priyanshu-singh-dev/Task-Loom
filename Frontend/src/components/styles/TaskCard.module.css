@@ -1,12 +1,41 @@
 .mainContainer {
-  padding: 20px 30px;
-  background-color: var(--accent-color);
-  border-radius: 10px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+  cursor: pointer;
 }
-h2 {
-  font-size: 40px;
+.mainContainer:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 10px var(--main-theme-dark);
+  border-color: var(--main-theme-dark);
 }
-.buttonContainer {
-  display: flex;
-  justify-content: end;
+
+.taskTitle {
+  user-select: none;
+  font-size: 17px;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 6px;
+}
+
+.taskDescription {
+  user-select: none;
+  font-size: 13px;
+  color: black;
+  line-height: 1.5;
+  margin: 8px 0 12px 0;
+}
+.mainContainer::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+.activeCard {
+  border: 1px solid var(--main-theme-dark);
+  box-shadow: 0 0 15px var(--main-theme-dark);
 }

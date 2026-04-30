@@ -2,26 +2,38 @@ import React from "react";
 import { baseContext } from "./BaseContextProvider";
 export const appContext = React.createContext();
 export default function AppContextProvider({ children }) {
+  const [tasks, setTasks] = React.useState([]);
+  const [singleTask, setSingleTask] = React.useState({
+    taskTitle: "",
+    taskDescription: "",
+  });
   const [taskTitle, setTaskTitle] = React.useState("");
   const [taskDescription, setTaskDescirption] = React.useState("");
   const { baseUrl } = React.useContext(baseContext);
-  /* this is the fetch the task of the user*/
+  React.useEffect(() => {
+    console.log(singleTask);
+  }, [singleTask]);
   async function fetchTask() {
     try {
-      const result = await fetch(`${baseUrl}/home`, {
+      const result = await fetch(`${baseUrl}/tasks`, {
         method: "GET",
         credentials: "include",
       });
-      console.log(result.json().then((response) => console.log(response)));
+      result.json().then((response) => {
+        if (response.success) {
+          setTasks(response.message);
+        } else {
+          console.log("No task are there");
+        }
+      });
     } catch (e) {
       console.log(e);
     } finally {
+      console.log(tasks);
       console.log("Fetch the result of home page");
     }
   }
-  /* this is to create the task by the user*/
   async function createTask() {
-    console.log("function started");
     const data = {
       taskTitle,
       taskDescription,
@@ -43,25 +55,37 @@ export default function AppContextProvider({ children }) {
       .finally(() => {
         console.log("execution complete");
       });
-    console.log("function ended");
   }
-  const [taskId, setTaskId] = React.useState();
-  const tempTaskData = [
-    { id: 1, taskName: "Greeting", taskDescription: "Greeting to someOne" },
-    { id: 2, taskName: "Greeting", taskDescription: "Greeting to someOne" },
-    { id: 3, taskName: "Greeting", taskDescription: "Greeting to someOne" },
-  ];
+  async function fetchSingleTask(id) {
+    console.log(id);
+    try {
+      const params = new URLSearchParams({ id });
+      const res = await fetch(`${baseUrl}/task?${params}`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSingleTask(data.message);
+      } else {
+        console.log(data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <appContext.Provider
       value={{
-        tempTaskData,
-        setTaskId,
         fetchTask,
         createTask,
         taskTitle,
         setTaskTitle,
         taskDescription,
         setTaskDescirption,
+        tasks,
+        fetchSingleTask,
+        singleTask,
       }}
     >
       {children}

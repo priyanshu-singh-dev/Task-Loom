@@ -11,10 +11,14 @@
   --border-color: #e6def5;
   --shadow-soft: 0 6px 18px rgba(128, 64, 191, 0.15);
   --shadow-soft: 0 6px 18px rgba(128, 64, 191, 0.15);
+  --danger-red: #e5484d;
 }
 * {
   padding: 0px;
   margin: 0px;
+}
+html {
+  overflow-x: hidden;
 }
 h1 {
   font-size: 54px;
